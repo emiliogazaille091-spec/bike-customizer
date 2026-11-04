@@ -172,13 +172,18 @@ const P = {
   deda:"Deda_Superzero_Carbon_Seatpost_for_Di2_(9844733255).jpg",
   m520:"Shimano_SPD_pedal_PD-M520.jpg", daPedal:"Dura-Ace_9100_Pedals_03.jpg", flats:"Mountain_bike_pedals_detail_211600155_554ad5021c.jpg",
   rotor:"Bike_disc_brake_rotor.jpg", shimanoDisc:"Shimano_Disc_Brake.jpg",
-  garmin:"Garmin_Edge_810.jpg", proCage:"Shimano_PRO_Bottle_Cage_Glass_Fiber_Black.JPG"
+  garmin:"Garmin_Edge_810.jpg", garmin705:"Garmin_Edge_705.jpg",
+  ultegraCrank:"Shimnao_Ultegra_Crank_(FC-6603).jpg", ultegraLever:"Shimano_Ultegra_Brifter.jpg", reba:"Rock_Shox_Reba_Race.jpg",
+  zippStem:"Zipp_Sl_Sprint_Carbon_Stem_(9845087974).jpg", fizik:"Fizik_Demo_Saddles_(9026721685).jpg", eggbeater:"Eggbeater_mxr_-_crank_brothers.jpg",
+  canyon:"Canyon_Ultimate_CF_MTB.jpg", dh:"Mountain_bike_in_downhill_race.jpg", ss:"Single-speed_mountain_bike.jpg",
+  fsa:"FSA_Crankset.JPG", rotorCrank:"Rotor_crankset_with_Q-rings.jpg", cassette:"Recon_bicycle_cassette_10-speed_11-34T.JPG",
+  dynamoHub:"Shimano_dynamo_hub.jpg", bell:"Bike_bell.JPG", stiShimano:"ShimanoSTI_ST-1055.jpg", saint:"Shimanosaintrd.jpg", proCage:"Shimano_PRO_Bottle_Cage_Glass_Fiber_Black.JPG"
 };
 
 const CATS = [
   {id:"frame", label:"Frameset", items:[
     {n:"Cannondale CAAD13", t:["road"], p:1400, note:"Aluminum frame that rides like carbon", img:P.caad10, cap:"Cannondale CAAD10, the CAAD13's older sibling"},
-    {n:"Canyon Ultimate CF SLX", t:["road"], p:2900, note:"Light carbon climbing frame", img:P.supersix, cap:"Example carbon road bike (Cannondale SuperSix)"},
+    {n:"Canyon Ultimate CF SLX", t:["road"], p:2900, note:"Light carbon climbing frame", img:P.canyon, cap:"Canyon Ultimate CF"},
     {n:"Cannondale SuperSix EVO", t:["road"], p:3500, note:"Carbon race frame, aero and light", img:P.supersix, cap:"Cannondale SuperSix"},
     {n:"Specialized S-Works Tarmac SL8", t:["road"], p:5500, note:"Pro race frame, very light and stiff", img:P.specRoad, cap:"A Specialized road bike"},
     {n:"Surly Straggler", t:["gravel"], p:800, note:"Tough steel frame, built to last", img:P.gravelTunnel, cap:"Example gravel bike"},
@@ -188,10 +193,13 @@ const CATS = [
     {n:"Marin Rift Zone", t:["mtb"], p:1600, note:"Playful aluminum trail frame", img:P.mtb1, cap:"Example full-suspension mountain bike"},
     {n:"Trek Fuel EX", t:["mtb"], p:3300, note:"Trail bike that does everything well", img:P.mtbAll, cap:"Example all-mountain bike"},
     {n:"Santa Cruz Hightower C", t:["mtb"], p:3900, note:"Carbon trail frame with rear shock", img:P.mtbAll, cap:"Example all-mountain bike"},
-    {n:"Specialized Stumpjumper", t:["mtb"], p:4200, note:"Do-it-all trail frame", img:P.mtb2, cap:"Example mountain bike"}
+    {n:"Specialized Stumpjumper", t:["mtb"], p:4200, note:"Do-it-all trail frame", img:P.mtb2, cap:"Example mountain bike"},
+    {n:"Commencal Supreme DH", t:["mtb"], p:3500, note:"Downhill race frame, 200mm travel", img:P.dh, cap:"A downhill mountain bike racing"},
+    {n:"Surly Karate Monkey", t:["mtb"], p:900, note:"Steel hardtail, simple and fun", img:P.ss, cap:"Example steel hardtail mountain bike"}
   ]},
   {id:"fork", label:"Suspension fork", only:["mtb"], items:[
     {n:"RockShox SID Ultimate", t:["mtb"], p:950, note:"120mm travel, cross-country speed", travel:"120", img:P.sid, cap:"RockShox SID (older model)"},
+    {n:"RockShox Reba RL", t:["mtb"], p:550, note:"100mm travel, light and simple", travel:"100", img:P.reba, cap:"RockShox Reba Race"},
     {n:"RockShox Pike Select", t:["mtb"], p:800, note:"140mm travel, trail favorite", travel:"140", img:P.dart, cap:"A RockShox suspension fork"},
     {n:"Fox 34 Factory", t:["mtb"], p:1100, note:"130mm travel, light and smooth", travel:"130", img:P.dart, cap:"Example suspension fork"},
     {n:"Fox 36 Factory", t:["mtb"], p:1250, note:"160mm travel for big descents", travel:"160", img:P.dart, cap:"Example suspension fork"},
@@ -200,7 +208,9 @@ const CATS = [
   {id:"group", label:"Groupset (gears + brakes)", items:[
     {n:"Shimano 105 R7100", t:["road"], p:1000, note:"12-speed mechanical, great value", img:P.rd105, cap:"Shimano 105 rear derailleur"},
     {n:"Shimano 105 Di2", t:["road"], p:1500, note:"Electronic shifting for less", img:P.crank105, cap:"Shimano 105 crankset"},
-    {n:"Shimano Ultegra Di2", t:["road"], p:2100, note:"12-speed electronic shifting", img:P.da9100, cap:"Shimano Dura-Ace groupset (Ultegra looks similar)"},
+    {n:"Shimano Ultegra Di2", t:["road"], p:2100, note:"12-speed electronic shifting", img:P.ultegraLever, cap:"Shimano Ultegra shifter"},
+    {n:"Shimano Ultegra R8100 mechanical", t:["road"], p:1500, note:"Cable shifting, pro-level feel", img:P.ultegraCrank, cap:"Shimano Ultegra crankset (older model)"},
+    {n:"Shimano Tiagra 4700", t:["road"], p:550, note:"10-speed, budget friendly", img:P.stiShimano, cap:"Example Shimano road shifter"},
     {n:"Shimano Dura-Ace Di2", t:["road"], p:3800, note:"Shimano's top pro groupset", img:P.da9100, cap:"Shimano Dura-Ace groupset"},
     {n:"SRAM Rival AXS", t:["road","gravel"], p:1400, note:"Wireless electronic shifting", img:P.rival, cap:"SRAM Rival derailleur"},
     {n:"SRAM Force AXS", t:["road","gravel"], p:2400, note:"Lighter wireless, race ready", img:P.red, cap:"SRAM eTap derailleur (Force looks similar)"},
@@ -210,6 +220,7 @@ const CATS = [
     {n:"Shimano Deore M6100", t:["mtb"], p:500, note:"12-speed workhorse", img:P.deore, cap:"Shimano Deore rear derailleur"},
     {n:"Shimano SLX M7100", t:["mtb"], p:700, note:"Lighter, smoother than Deore", img:P.deore, cap:"Shimano Deore derailleur (SLX looks similar)"},
     {n:"Shimano XT M8100", t:["mtb"], p:1100, note:"Fast, reliable shifting", img:P.xt, cap:"Shimano XT rear derailleur"},
+    {n:"Shimano Saint M820", t:["mtb"], p:900, note:"Built for downhill abuse", img:P.saint, cap:"Shimano Saint rear derailleur"},
     {n:"SRAM GX Eagle Transmission", t:["mtb"], p:1500, note:"Wireless, super tough derailleur", img:P.eagle, cap:"SRAM Eagle AXS derailleur"},
     {n:"SRAM XX Eagle Transmission", t:["mtb"], p:2800, note:"SRAM's lightest wireless MTB group", img:P.eagle, cap:"SRAM Eagle AXS derailleur"}
   ]},
@@ -251,6 +262,23 @@ const CATS = [
     {n:"Race Face Turbine R", t:["mtb"], p:90, note:"Strong aluminum riser bar", img:P.mtbBar, cap:"Example mountain bike handlebar"},
     {n:"OneUp Carbon Bar", t:["mtb"], p:150, note:"Carbon, soaks up trail buzz", img:P.mtbBar, cap:"Example mountain bike handlebar"}
   ]},
+  {id:"stem", label:"Stem", items:[
+    {n:"Zipp Service Course SL Sprint", t:["road","gravel"], p:230, note:"Super stiff for sprinting", img:P.zippStem, cap:"Zipp SL Sprint carbon stem"},
+    {n:"Thomson X4", t:["road","gravel","mtb"], p:90, note:"Machined aluminum, bombproof", img:P.zippStem, cap:"Example stem (Zipp)"},
+    {n:"Race Face Turbine R 35", t:["mtb"], p:100, note:"Short stem for quick steering", img:P.mtbBar, cap:"Example mountain bike cockpit"}
+  ]},
+  {id:"crank", label:"Crankset upgrade", optional:true, items:[
+    {n:"Keep groupset crankset", t:["road","gravel","mtb"], p:0, note:"Comes with your groupset"},
+    {n:"FSA SL-K Carbon", t:["road","gravel"], p:350, note:"Light carbon arms", img:P.fsa, cap:"FSA crankset"},
+    {n:"Rotor Aldhu with Q-Rings", t:["road","gravel"], p:500, note:"Oval chainrings for smooth power", img:P.rotorCrank, cap:"Rotor crankset with Q-Rings"},
+    {n:"Race Face Next SL", t:["mtb"], p:450, note:"Ultralight carbon MTB cranks", img:P.fsa, cap:"Example crankset (FSA)"}
+  ]},
+  {id:"cassette", label:"Cassette upgrade", optional:true, items:[
+    {n:"Keep groupset cassette", t:["road","gravel","mtb"], p:0, note:"Comes with your groupset"},
+    {n:"Garbaruk 10-52T", t:["mtb","gravel"], p:400, note:"Light, wide range, colorful", img:P.cassette, cap:"Example bike cassette"},
+    {n:"e*thirteen Helix 9-46T", t:["mtb"], p:300, note:"Extra-small 9T cog for speed", img:P.cassette, cap:"Example bike cassette"},
+    {n:"Shimano Dura-Ace 11-30T", t:["road"], p:320, note:"Titanium cogs, very light", img:P.cassette, cap:"Example bike cassette"}
+  ]},
   {id:"grip", label:"Bar tape / grips", items:[
     {n:"Supacaz Super Sticky Kush", t:["road","gravel"], p:40, note:"Grippy, comes in lots of colors", img:P.dropBar, cap:"Example wrapped handlebar"},
     {n:"Lizard Skins DSP 3.2", t:["road","gravel"], p:45, note:"Thick and comfy", img:P.dropBar, cap:"Example wrapped handlebar"},
@@ -259,7 +287,8 @@ const CATS = [
   ]},
   {id:"saddle", label:"Saddle", items:[
     {n:"Specialized Power Expert", t:["road","gravel","mtb"], p:165, note:"Short nose, very popular", color:"#222", img:P.saddle, cap:"Example bike saddle"},
-    {n:"Fizik Antares R3", t:["road","gravel"], p:200, note:"Sleek racing shape", color:"#2b2b2b", img:P.saddle2, cap:"Example racing saddle"},
+    {n:"Fizik Antares R3", t:["road","gravel"], p:200, note:"Sleek racing shape", color:"#2b2b2b", img:P.fizik, cap:"Fizik saddles"},
+    {n:"Fizik Terra Argo", t:["gravel","mtb"], p:150, note:"Short, wide, comfy off-road", color:"#1b1b1b", img:P.fizik, cap:"Fizik saddles"},
     {n:"Brooks B17", t:["road","gravel"], p:150, note:"Classic leather, honey brown", color:"#b8762f", img:P.brooks, cap:"Brooks leather saddle"},
     {n:"WTB Volt", t:["gravel","mtb"], p:60, note:"Comfy, budget friendly", color:"#1f1f1f", img:P.saddle, cap:"Example bike saddle"},
     {n:"Ergon SM Enduro", t:["mtb"], p:120, note:"Built for long trail days", color:"#333", img:P.saddle, cap:"Example bike saddle"}
@@ -281,12 +310,13 @@ const CATS = [
     {n:"Look Keo Blade", t:["road"], p:150, note:"Light clip-in road pedals", img:P.daPedal, cap:"Example road clip-in pedals"},
     {n:"Shimano XT M8100 SPD", t:["gravel","mtb"], p:120, note:"Clip-in, walkable shoes", img:P.m520, cap:"Shimano SPD pedal (M520)"},
     {n:"Crankbrothers Stamp 7", t:["gravel","mtb"], p:150, note:"Grippy flat pedals", img:P.flats, cap:"Example flat pedals"},
+    {n:"Crankbrothers Eggbeater 3", t:["road","gravel","mtb"], p:140, note:"Clip in from 4 sides, sheds mud", img:P.eggbeater, cap:"Crankbrothers Eggbeater pedal"},
     {n:"OneUp Aluminum Flat", t:["mtb"], p:140, note:"Thin, super grippy flats", img:P.flats, cap:"Example flat pedals"}
   ]},
   {id:"computer", label:"Bike computer", optional:true, items:[
     {n:"No computer", t:["road","gravel","mtb"], p:0, note:"Just ride"},
     {n:"Garmin Edge 540", t:["road","gravel","mtb"], p:350, note:"Maps, speed, training stats", img:P.garmin, cap:"Garmin Edge (older 810 model)"},
-    {n:"Garmin Edge 1050", t:["road","gravel","mtb"], p:700, note:"Big color touchscreen", img:P.garmin, cap:"Garmin Edge (older 810 model)"},
+    {n:"Garmin Edge 1050", t:["road","gravel","mtb"], p:700, note:"Big color touchscreen", img:P.garmin705, cap:"Garmin Edge (older 705 model)"},
     {n:"Wahoo ELEMNT Bolt", t:["road","gravel","mtb"], p:280, note:"Simple, aero, easy app setup"},
     {n:"Hammerhead Karoo", t:["road","gravel","mtb"], p:480, note:"Phone-like screen and maps"}
   ]},
@@ -295,6 +325,11 @@ const CATS = [
     {n:"Lezyne Micro Drive + KTV combo", t:["road","gravel","mtb"], p:70, note:"Front and rear, USB rechargeable"},
     {n:"Bontrager Ion 200 RT + Flare RT", t:["road","gravel","mtb"], p:120, note:"Daytime-visible flashing lights"},
     {n:"Lupine Piko", t:["mtb"], p:300, note:"Helmet light for night trail rides"}
+  ]},
+  {id:"bell", label:"Bell", optional:true, items:[
+    {n:"No bell", t:["road","gravel","mtb"], p:0, note:"Shout instead"},
+    {n:"Spurcycle Bell", t:["road","gravel","mtb"], p:50, note:"Tiny, loud and clear", img:P.bell, cap:"Example bike bell"},
+    {n:"Knog Oi", t:["road","gravel","mtb"], p:25, note:"Wraps around the bar, sleek", img:P.bell, cap:"Example bike bell"}
   ]},
   {id:"cage", label:"Bottle cage", optional:true, items:[
     {n:"No bottle cage", t:["road","gravel","mtb"], p:0, note:"Bring a backpack"},
@@ -329,134 +364,221 @@ function fixPicks(){
 }
 
 /* ---------- Drawing ---------- */
+function shade(hex,amt){
+  const n=parseInt(hex.slice(1),16);
+  const f=v=>Math.max(0,Math.min(255,Math.round(amt<0? v*(1+amt) : v+(255-v)*amt)));
+  return "#"+[(n>>16)&255,(n>>8)&255,n&255].map(f).map(v=>v.toString(16).padStart(2,"0")).join("");
+}
 function bikeSVG(){
   const T = state.type, col = state.color;
   const wh = chosen("wheels"), ti = chosen("tires"), sd = chosen("saddle");
   const R = {x:150,y:270}, F = {x:470,y:270}, BB = {x:290,y:278};
-  const tireW = T==="road"?7:T==="gravel"?10:15;
+  const tireW = T==="road"?8:T==="gravel"?11:16;
   const rOut = 100;
-  const rTire = rOut - tireW/2;
   const depth = wh.depth||6;
-  const rRim = rOut - tireW - depth/2;
-  const rInner = rOut - tireW - depth;
-  const dark = "#1b1d22";
-  const metal = "#8a9099";
+  const rRimOut = rOut - tireW;
+  const rInner = rRimOut - depth;
+  const carbon = depth>10 || /Reserve|ENVE/.test(wh.n);
   const light = luminance(col) > .75;
   const frameStroke = light ? "#c9ccd1" : "none";
 
-  // geometry per type
   let S, H1, H2, seatTop, stemEnd;
   if(T==="road"){ S={x:262,y:142}; H1={x:432,y:128}; H2={x:443,y:176}; seatTop={x:252,y:104}; }
   else if(T==="gravel"){ S={x:262,y:146}; H1={x:432,y:124}; H2={x:444,y:180}; seatTop={x:253,y:106}; }
   else { S={x:266,y:168}; H1={x:430,y:132}; H2={x:445,y:188}; seatTop={x:254,y:108}; }
-  const ST = {x:S.x+ (BB.x-S.x)*0.0, y:S.y};
 
-  const wheel = (c) => {
-    let spokes = "";
-    for(let i=0;i<20;i++){
-      const a = i*Math.PI/10;
-      spokes += `<line x1="${c.x}" y1="${c.y}" x2="${(c.x+Math.cos(a)*rInner).toFixed(1)}" y2="${(c.y+Math.sin(a)*rInner).toFixed(1)}" stroke="${metal}" stroke-width="1"/>`;
+  const defs = `<defs>
+    <linearGradient id="gFrame" gradientUnits="userSpaceOnUse" x1="0" y1="110" x2="0" y2="300">
+      <stop offset="0" stop-color="${shade(col,.28)}"/><stop offset=".45" stop-color="${col}"/><stop offset="1" stop-color="${shade(col,-.35)}"/></linearGradient>
+    <linearGradient id="gChrome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f6f8"/><stop offset=".5" stop-color="#9aa2ac"/><stop offset="1" stop-color="#e3e7eb"/></linearGradient>
+    <linearGradient id="gBlack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a4e56"/><stop offset=".5" stop-color="#1c1e22"/><stop offset="1" stop-color="#0b0c0e"/></linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8f6d24"/><stop offset=".45" stop-color="#f1d58a"/><stop offset="1" stop-color="#a47e2c"/></linearGradient>
+    <linearGradient id="gSaddle" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade(sd.color,.35)}"/><stop offset="1" stop-color="${sd.color}"/></linearGradient>
+    <filter id="blur" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="5"/></filter>
+    ${[R,F].map((c,k)=>`
+    <radialGradient id="gTire${k}" gradientUnits="userSpaceOnUse" cx="${c.x}" cy="${c.y}" r="${rOut}">
+      <stop offset="${(rRimOut/rOut).toFixed(3)}" stop-color="${ti.tan?"#c9985a":"#2c2f35"}"/>
+      <stop offset="${((rRimOut+tireW*.45)/rOut).toFixed(3)}" stop-color="${ti.tan?"#a8783f":"#1b1d21"}"/>
+      <stop offset="${((rRimOut+tireW*.55)/rOut).toFixed(3)}" stop-color="#15161a"/>
+      <stop offset="1" stop-color="#050506"/></radialGradient>
+    <radialGradient id="gRim${k}" gradientUnits="userSpaceOnUse" cx="${c.x-30}" cy="${c.y-40}" r="${rOut*1.4}">
+      <stop offset="0" stop-color="${carbon?"#5a5f68":"#d8dde2"}"/><stop offset=".55" stop-color="${carbon?"#1d1f24":"#7e858e"}"/><stop offset="1" stop-color="${carbon?"#0e0f12":"#4c525a"}"/></radialGradient>`).join("")}
+  </defs>`;
+
+  const wheel = (c,k,front) => {
+    let g = "";
+    // ground contact shadow
+    g += `<ellipse cx="${c.x}" cy="${c.y+rOut+2}" rx="60" ry="5" fill="#000" opacity=".22" filter="url(#blur)"/>`;
+    // tire body
+    g += `<circle cx="${c.x}" cy="${c.y}" r="${rOut - tireW/2}" fill="none" stroke="url(#gTire${k})" stroke-width="${tireW}"/>`;
+    // tread
+    if(ti.style!=="slick"){
+      const n = ti.style==="knobby"?56:80, kw = ti.style==="knobby"?5:2.5, kh = ti.style==="knobby"?4:2;
+      for(let i=0;i<n;i++){ const a=i*360/n;
+        g += `<rect x="${c.x-kw/2}" y="${c.y-rOut-kh+1}" width="${kw}" height="${kh}" rx="1" fill="#141518" transform="rotate(${a.toFixed(1)} ${c.x} ${c.y})"/>`; }
+    } else {
+      g += `<circle cx="${c.x}" cy="${c.y}" r="${rOut-1.2}" fill="none" stroke="#3b3f46" stroke-width=".8" opacity=".7"/>`;
     }
-    let tire = `<circle cx="${c.x}" cy="${c.y}" r="${rTire}" fill="none" stroke="${dark}" stroke-width="${tireW}"/>`;
-    if(ti.style==="knobby"){
-      tire += `<circle cx="${c.x}" cy="${c.y}" r="${rOut+2}" fill="none" stroke="${dark}" stroke-width="5" stroke-dasharray="4 4"/>`;
-    } else if(ti.style==="semi"){
-      tire += `<circle cx="${c.x}" cy="${c.y}" r="${rOut+1}" fill="none" stroke="${dark}" stroke-width="3" stroke-dasharray="2 5"/>`;
+    // tire label on sidewall
+    g += `<circle cx="${c.x}" cy="${c.y}" r="${rRimOut+tireW*.5}" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.2" stroke-dasharray="18 300" transform="rotate(${front?200:-30} ${c.x} ${c.y})"/>`;
+    // rim
+    g += `<circle cx="${c.x}" cy="${c.y}" r="${rRimOut - depth/2}" fill="none" stroke="url(#gRim${k})" stroke-width="${depth}"/>`;
+    g += `<circle cx="${c.x}" cy="${c.y}" r="${rRimOut-.5}" fill="none" stroke="#b9bfc6" stroke-width="1" opacity=".6"/>`;
+    if(depth>10) g += `<circle cx="${c.x}" cy="${c.y}" r="${rRimOut - depth/2}" fill="none" stroke="#fff" stroke-opacity=".75" stroke-width="2.2" stroke-dasharray="30 190" transform="rotate(${front?20:160} ${c.x} ${c.y})"/>`;
+    // spokes, tangential lacing
+    const sp = T==="mtb"?28:24;
+    for(let i=0;i<sp;i++){
+      const a = i*2*Math.PI/sp, off = (i%2?1:-1)*0.32;
+      const hx = c.x+Math.cos(a)*9, hy = c.y+Math.sin(a)*9;
+      const rx = c.x+Math.cos(a+off)*rInner, ry = c.y+Math.sin(a+off)*rInner;
+      g += `<line x1="${hx.toFixed(1)}" y1="${hy.toFixed(1)}" x2="${rx.toFixed(1)}" y2="${ry.toFixed(1)}" stroke="#a9b0b8" stroke-width=".9"/>`;
     }
-    if(ti.tan){
-      tire += `<circle cx="${c.x}" cy="${c.y}" r="${rOut - tireW + 1.5}" fill="none" stroke="#c99a5b" stroke-width="3"/>`;
-    }
-    const rim = `<circle cx="${c.x}" cy="${c.y}" r="${rRim}" fill="none" stroke="${depth>10?"#23262c":"#3a3e46"}" stroke-width="${depth}"/>`;
-    const decal = depth>10 ? `<circle cx="${c.x}" cy="${c.y}" r="${rRim}" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-dasharray="26 60"/>` : "";
-    const rotor = `<circle cx="${c.x}" cy="${c.y}" r="17" fill="none" stroke="#b8bec6" stroke-width="3"/>`;
-    const hub = `<circle cx="${c.x}" cy="${c.y}" r="6" fill="${dark}"/>`;
-    return spokes + rim + decal + tire + rotor + hub;
+    // disc rotor with holes
+    const rr = T==="mtb"?22:18;
+    g += `<circle cx="${c.x}" cy="${c.y}" r="${rr}" fill="none" stroke="url(#gChrome)" stroke-width="5"/>`;
+    g += `<circle cx="${c.x}" cy="${c.y}" r="${rr}" fill="none" stroke="#555b63" stroke-width="1.6" stroke-dasharray="1.6 3.2"/>`;
+    for(let i=0;i<5;i++){ const a=i*72*Math.PI/180;
+      g += `<line x1="${c.x}" y1="${c.y}" x2="${(c.x+Math.cos(a)*(rr-2)).toFixed(1)}" y2="${(c.y+Math.sin(a)*(rr-2)).toFixed(1)}" stroke="#8f969f" stroke-width="2.4"/>`; }
+    // hub
+    g += `<circle cx="${c.x}" cy="${c.y}" r="9" fill="url(#gBlack)"/><circle cx="${c.x}" cy="${c.y}" r="3.2" fill="url(#gChrome)"/>`;
+    return g;
   };
 
-  const tube = (a,b,w) => `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`;
-  const tubeOutline = (a,b,w) => frameStroke==="none" ? "" : `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${frameStroke}" stroke-width="${w+2}" stroke-linecap="round"/>`;
+  // shiny tube: base + dark edge + highlight stripe
+  const tube = (a,b,w) => {
+    const dx=b.x-a.x, dy=b.y-a.y, L=Math.hypot(dx,dy), nx=-dy/L, ny=dx/L;
+    const o = w*0.22;
+    const sgn = ny<0? 1 : -1;  // highlight toward the top
+    const hx = nx*o*sgn, hy = ny*o*sgn;
+    return (frameStroke==="none"?"":`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${frameStroke}" stroke-width="${w+2}" stroke-linecap="round"/>`) +
+      `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${shade(col,-.3)}" stroke-width="${w+1}" stroke-linecap="round"/>` +
+      `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="url(#gFrame)" stroke-width="${w-.5}" stroke-linecap="round"/>` +
+      `<line x1="${(a.x+hx+dx*.04).toFixed(1)}" y1="${(a.y+hy+dy*.04).toFixed(1)}" x2="${(b.x+hx-dx*.04).toFixed(1)}" y2="${(b.y+hy-dy*.04).toFixed(1)}" stroke="#fff" stroke-opacity=".38" stroke-width="${Math.max(1.2,w*.18).toFixed(1)}" stroke-linecap="round"/>`;
+  };
 
   // fork
-  let fork;
+  let fork, caliperF;
   if(T==="mtb"){
-    const fk = chosen("fork");
+    const fk = chosen("fork"), fox = fk.n.startsWith("Fox");
     const crown = {x:H2.x+3,y:H2.y+12};
-    const lowTop = {x:H2.x+ (F.x-H2.x)*0.45, y:H2.y+(F.y-H2.y)*0.45};
-    fork = `<line x1="${crown.x}" y1="${crown.y}" x2="${lowTop.x}" y2="${lowTop.y}" stroke="${fk.n.startsWith("Fox")?"#c5a042":"#2a2d33"}" stroke-width="9" stroke-linecap="round"/>
-      <line x1="${lowTop.x}" y1="${lowTop.y}" x2="${F.x}" y2="${F.y}" stroke="${fk.n.startsWith("Fox")?"#e8762b":"#111"}" stroke-width="13" stroke-linecap="round"/>
-      <rect x="${H2.x-8}" y="${H2.y+4}" width="20" height="12" rx="4" fill="#111"/>
-      <text x="${lowTop.x+14}" y="${lowTop.y+30}" font-size="10" font-family="Inter,sans-serif" fill="${dark}" font-weight="700">${fk.travel}mm</text>`;
+    const lowTop = {x:H2.x+(F.x-H2.x)*0.45, y:H2.y+(F.y-H2.y)*0.45};
+    fork = `<line x1="${crown.x}" y1="${crown.y}" x2="${lowTop.x}" y2="${lowTop.y}" stroke="${fox?"url(#gGold)":"url(#gChrome)"}" stroke-width="9" stroke-linecap="round"/>
+      <line x1="${lowTop.x}" y1="${lowTop.y}" x2="${F.x}" y2="${F.y}" stroke="${fox?"#e8762b":"url(#gBlack)"}" stroke-width="14" stroke-linecap="round"/>
+      <line x1="${lowTop.x+2}" y1="${lowTop.y+4}" x2="${F.x-2}" y2="${F.y-8}" stroke="#fff" stroke-opacity=".25" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="${H2.x-9}" y="${H2.y+3}" width="22" height="13" rx="4" fill="url(#gBlack)"/>`;
+    caliperF = {x:F.x-10,y:F.y-24};
   } else {
-    fork = `<path d="M${H2.x} ${H2.y} Q ${F.x-2} ${H2.y+50} ${F.x} ${F.y}" fill="none" stroke="${col}" stroke-width="8" stroke-linecap="round"/>`;
+    fork = `<path d="M${H2.x} ${H2.y} Q ${F.x-2} ${H2.y+50} ${F.x} ${F.y}" fill="none" stroke="${shade(col,-.3)}" stroke-width="9" stroke-linecap="round"/>
+            <path d="M${H2.x} ${H2.y} Q ${F.x-2} ${H2.y+50} ${F.x} ${F.y}" fill="none" stroke="url(#gFrame)" stroke-width="7" stroke-linecap="round"/>
+            <path d="M${H2.x-2} ${H2.y+4} Q ${F.x-5} ${H2.y+50} ${F.x-3} ${F.y-6}" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.5"/>`;
+    caliperF = {x:F.x-6,y:F.y-22};
   }
 
   // frame
   let frame = "";
-  const segs = [[S,BB,11],[BB,R,8],[S,R,7],[S,H1,10],[BB,H2,13],[H1,H2,14]];
-  segs.forEach(s=>frame+=tubeOutline(...s));
-  segs.forEach(s=>frame+=tube(...s));
+  const segs = [[BB,R,8],[S,R,7],[S,BB,11],[S,H1,10],[BB,H2,13],[H1,H2,15]];
+  segs.forEach(sg=>frame+=tube(...sg));
+  frame += `<circle cx="${BB.x}" cy="${BB.y}" r="10" fill="url(#gFrame)"/><circle cx="${R.x}" cy="${R.y}" r="5" fill="${shade(col,-.3)}"/>`;
+  // head badge
+  frame += `<circle cx="${(H1.x+H2.x)/2}" cy="${(H1.y+H2.y)/2}" r="4.5" fill="url(#gChrome)" stroke="${shade(col,-.4)}" stroke-width="1"/>`;
   if(T==="mtb"){
-    // rear shock
-    frame += `<line x1="${S.x+25}" y1="${S.y+4}" x2="${BB.x+30}" y2="${BB.y-55}" stroke="#111" stroke-width="7" stroke-linecap="round"/>
-              <line x1="${S.x+28}" y1="${S.y+8}" x2="${S.x+46}" y2="${S.y+36}" stroke="#c5a042" stroke-width="5"/>`;
+    frame += `<line x1="${S.x+24}" y1="${S.y+4}" x2="${BB.x+30}" y2="${BB.y-55}" stroke="url(#gBlack)" stroke-width="9" stroke-linecap="round"/>
+              <line x1="${S.x+27}" y1="${S.y+9}" x2="${S.x+44}" y2="${S.y+34}" stroke="url(#gGold)" stroke-width="5"/>
+              <circle cx="${S.x+24}" cy="${S.y+4}" r="3" fill="url(#gChrome)"/><circle cx="${BB.x+30}" cy="${BB.y-55}" r="3" fill="url(#gChrome)"/>`;
   }
+  // brake hose along down tube to rear caliper
+  const caliperR = {x:R.x+20,y:R.y-12};
+  const hoses = `<path d="M${H1.x+6} ${H1.y-6} Q ${H2.x+30} ${H2.y-10} ${caliperF.x+4} ${caliperF.y}" fill="none" stroke="#111" stroke-width="1.6"/>
+    <path d="M${H2.x-4} ${H2.y} L ${BB.x+12} ${BB.y-6} L ${caliperR.x+6} ${caliperR.y+2}" fill="none" stroke="#111" stroke-width="1.4" opacity=".85"/>`;
+  const calipers = `<rect x="${caliperF.x-6}" y="${caliperF.y-7}" width="14" height="12" rx="3" fill="url(#gBlack)"/>
+    <rect x="${caliperR.x-7}" y="${caliperR.y-6}" width="14" height="11" rx="3" fill="url(#gBlack)"/>`;
 
   // seatpost + saddle
   const post = T==="mtb"
-    ? `<line x1="${S.x}" y1="${S.y}" x2="${seatTop.x}" y2="${seatTop.y}" stroke="#111" stroke-width="8"/><line x1="${S.x-1}" y1="${S.y-6}" x2="${S.x-2}" y2="${S.y-14}" stroke="#555" stroke-width="10"/>`
-    : `<line x1="${S.x}" y1="${S.y}" x2="${seatTop.x}" y2="${seatTop.y}" stroke="#2a2d33" stroke-width="6"/>`;
-  const saddle = sd.n.includes("Brooks")
-    ? `<path d="M${seatTop.x-34} ${seatTop.y-6} Q ${seatTop.x-30} ${seatTop.y-16} ${seatTop.x} ${seatTop.y-12} L ${seatTop.x+30} ${seatTop.y-8} Q ${seatTop.x+34} ${seatTop.y-4} ${seatTop.x+26} ${seatTop.y-2} L ${seatTop.x-30} ${seatTop.y+2} Z" fill="${sd.color}"/>
-       <circle cx="${seatTop.x-24}" cy="${seatTop.y-4}" r="1.6" fill="#e9d2a8"/><circle cx="${seatTop.x+20}" cy="${seatTop.y-5}" r="1.6" fill="#e9d2a8"/>`
-    : `<path d="M${seatTop.x-34} ${seatTop.y-8} Q ${seatTop.x-20} ${seatTop.y-14} ${seatTop.x+6} ${seatTop.y-11} L ${seatTop.x+32} ${seatTop.y-8} Q ${seatTop.x+36} ${seatTop.y-4} ${seatTop.x+28} ${seatTop.y-3} L ${seatTop.x-28} ${seatTop.y} Q ${seatTop.x-38} ${seatTop.y-2} ${seatTop.x-34} ${seatTop.y-8} Z" fill="${sd.color}"/>`;
+    ? `<line x1="${S.x}" y1="${S.y}" x2="${seatTop.x}" y2="${seatTop.y}" stroke="url(#gBlack)" stroke-width="9"/>
+       <line x1="${S.x-1.5}" y1="${S.y-30}" x2="${seatTop.x+1}" y2="${seatTop.y+4}" stroke="url(#gChrome)" stroke-width="5"/>
+       <line x1="${S.x-1}" y1="${S.y-6}" x2="${S.x-2}" y2="${S.y-14}" stroke="#333" stroke-width="11"/>`
+    : `<line x1="${S.x}" y1="${S.y}" x2="${seatTop.x}" y2="${seatTop.y}" stroke="url(#gBlack)" stroke-width="7"/>
+       <line x1="${S.x-1}" y1="${S.y-2}" x2="${seatTop.x+1}" y2="${seatTop.y+3}" stroke="#fff" stroke-opacity=".25" stroke-width="1.5"/>`;
+  const st = seatTop;
+  const saddleShape = sd.n.includes("Brooks")
+    ? `M${st.x-34} ${st.y-6} Q ${st.x-30} ${st.y-17} ${st.x} ${st.y-13} L ${st.x+30} ${st.y-8} Q ${st.x+35} ${st.y-4} ${st.x+26} ${st.y-1} L ${st.x-30} ${st.y+3} Z`
+    : `M${st.x-34} ${st.y-8} Q ${st.x-20} ${st.y-15} ${st.x+6} ${st.y-11} L ${st.x+32} ${st.y-8} Q ${st.x+37} ${st.y-4} ${st.x+28} ${st.y-3} L ${st.x-28} ${st.y} Q ${st.x-38} ${st.y-2} ${st.x-34} ${st.y-8} Z`;
+  const saddle = `<path d="M${st.x-20} ${st.y} L ${st.x+18} ${st.y-2}" stroke="#777" stroke-width="2"/>
+    <path d="${saddleShape}" fill="url(#gSaddle)" stroke="${shade(sd.color,-.4)}" stroke-width=".8"/>
+    <path d="M${st.x-26} ${st.y-9} Q ${st.x-10} ${st.y-13} ${st.x+20} ${st.y-9}" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1.5"/>` +
+    (sd.n.includes("Brooks") ? `<circle cx="${st.x-24}" cy="${st.y-3}" r="1.8" fill="url(#gChrome)"/><circle cx="${st.x+20}" cy="${st.y-4}" r="1.8" fill="url(#gChrome)"/>` : "");
 
   // stem + bar
   let cockpit;
   const stemTop = {x:H1.x-4, y:H1.y-14};
+  const spacers = `<line x1="${H1.x}" y1="${H1.y}" x2="${stemTop.x}" y2="${stemTop.y}" stroke="url(#gBlack)" stroke-width="13"/>
+                   <line x1="${H1.x-2}" y1="${H1.y-5}" x2="${H1.x-2.6}" y2="${H1.y-7.5}" stroke="#555" stroke-width="14"/>`;
   if(T==="mtb"){
     stemEnd = {x:stemTop.x+22, y:stemTop.y-2};
-    cockpit = `<line x1="${H1.x}" y1="${H1.y}" x2="${stemTop.x}" y2="${stemTop.y}" stroke="#222" stroke-width="12"/>
-      <line x1="${stemTop.x}" y1="${stemTop.y}" x2="${stemEnd.x}" y2="${stemEnd.y}" stroke="#222" stroke-width="9" stroke-linecap="round"/>
+    cockpit = spacers + `<line x1="${stemTop.x}" y1="${stemTop.y}" x2="${stemEnd.x}" y2="${stemEnd.y}" stroke="url(#gBlack)" stroke-width="10" stroke-linecap="round"/>
       <path d="M${stemEnd.x} ${stemEnd.y} L ${stemEnd.x-8} ${stemEnd.y-16}" stroke="#2a2d33" stroke-width="6" stroke-linecap="round"/>
-      <rect x="${stemEnd.x-16}" y="${stemEnd.y-30}" width="13" height="16" rx="4" fill="#111" transform="rotate(-25 ${stemEnd.x-10} ${stemEnd.y-22})"/>
-      <line x1="${stemEnd.x-4}" y1="${stemEnd.y-10}" x2="${stemEnd.x+14}" y2="${stemEnd.y-4}" stroke="#555" stroke-width="3" stroke-linecap="round"/>`;
+      <rect x="${stemEnd.x-17}" y="${stemEnd.y-31}" width="14" height="17" rx="5" fill="url(#gBlack)" transform="rotate(-25 ${stemEnd.x-10} ${stemEnd.y-22})"/>
+      <line x1="${stemEnd.x-4}" y1="${stemEnd.y-10}" x2="${stemEnd.x+15}" y2="${stemEnd.y-4}" stroke="url(#gChrome)" stroke-width="3" stroke-linecap="round"/>`;
   } else {
     stemEnd = {x:stemTop.x+26, y:stemTop.y+1};
     const flare = T==="gravel" ? 6 : 0;
     const e = stemEnd;
-    cockpit = `<line x1="${H1.x}" y1="${H1.y}" x2="${stemTop.x}" y2="${stemTop.y}" stroke="#222" stroke-width="12"/>
-      <line x1="${stemTop.x}" y1="${stemTop.y}" x2="${e.x}" y2="${e.y}" stroke="#222" stroke-width="8" stroke-linecap="round"/>
-      <path d="M${e.x} ${e.y} L ${e.x+20} ${e.y+1} Q ${e.x+40} ${e.y+4} ${e.x+38+flare} ${e.y+26} Q ${e.x+36+flare} ${e.y+44} ${e.x+16+flare} ${e.y+42}" fill="none" stroke="#1d1f24" stroke-width="7" stroke-linecap="round"/>
-      <path d="M${e.x+16} ${e.y-1} Q ${e.x+22} ${e.y-16} ${e.x+30} ${e.y-10} L ${e.x+32} ${e.y+6} Z" fill="#111"/>`;
+    const barPath = `M${e.x} ${e.y} L ${e.x+20} ${e.y+1} Q ${e.x+40} ${e.y+4} ${e.x+38+flare} ${e.y+26} Q ${e.x+36+flare} ${e.y+44} ${e.x+16+flare} ${e.y+42}`;
+    cockpit = spacers + `<line x1="${stemTop.x}" y1="${stemTop.y}" x2="${e.x}" y2="${e.y}" stroke="url(#gBlack)" stroke-width="9" stroke-linecap="round"/>
+      <path d="${barPath}" fill="none" stroke="#16171a" stroke-width="8" stroke-linecap="round"/>
+      <path d="${barPath}" fill="none" stroke="#3a3d44" stroke-width="8" stroke-dasharray="1.2 3" stroke-linecap="butt"/>
+      <path d="M${e.x+16} ${e.y-1} Q ${e.x+22} ${e.y-17} ${e.x+31} ${e.y-11} L ${e.x+33} ${e.y+7} Z" fill="url(#gBlack)"/>
+      <path d="M${e.x+31} ${e.y+4} Q ${e.x+36} ${e.y+22} ${e.x+30} ${e.y+30}" fill="none" stroke="#2a2c31" stroke-width="3" stroke-linecap="round"/>`;
   }
+
+  // computer on stem
+  const comp = chosen("computer");
+  const computer = comp.p ? `<rect x="${stemEnd.x-6}" y="${stemEnd.y-14}" width="22" height="9" rx="2" fill="#111"/><rect x="${stemEnd.x-4}" y="${stemEnd.y-12.5}" width="18" height="6" rx="1" fill="#7fd6ff" opacity=".85"/>` : "";
+  const lit = chosen("lights");
+  const lights = lit.p ? `<rect x="${stemEnd.x+6}" y="${stemEnd.y+6}" width="14" height="8" rx="3" fill="#222"/><circle cx="${stemEnd.x+21}" cy="${stemEnd.y+10}" r="3" fill="#fffbe0"/>
+     <path d="M${stemEnd.x+23} ${stemEnd.y+10} L ${stemEnd.x+70} ${stemEnd.y-2} L ${stemEnd.x+70} ${stemEnd.y+22} Z" fill="#fff7b0" opacity=".25"/>
+     <rect x="${seatTop.x+2}" y="${seatTop.y+16}" width="6" height="11" rx="2" fill="#e23b3b" transform="rotate(-15 ${seatTop.x+5} ${seatTop.y+21})"/>` : "";
 
   // drivetrain
   const ringR = T==="mtb" ? 19 : 26;
   const cogR = T==="mtb" ? 22 : 14;
-  const chain = `<line x1="${BB.x}" y1="${BB.y-ringR}" x2="${R.x}" y2="${R.y-cogR}" stroke="#555" stroke-width="2.5"/>
-                 <line x1="${BB.x}" y1="${BB.y+ringR}" x2="${R.x+6}" y2="${R.y+cogR+22}" stroke="#555" stroke-width="2.5"/>`;
-  const cassette = `<circle cx="${R.x}" cy="${R.y}" r="${cogR}" fill="none" stroke="#9aa1aa" stroke-width="4"/>`;
-  const derailleur = `<path d="M${R.x+2} ${R.y+6} L ${R.x+10} ${R.y+cogR+22} L ${R.x-6} ${R.y+cogR+26} Z" fill="#2a2d33"/>`;
-  const ring = `<circle cx="${BB.x}" cy="${BB.y}" r="${ringR}" fill="none" stroke="#2a2d33" stroke-width="5"/><circle cx="${BB.x}" cy="${BB.y}" r="${ringR-7}" fill="none" stroke="#6b717b" stroke-width="2" stroke-dasharray="6 4"/>`;
+  const chain = `<line x1="${BB.x}" y1="${BB.y-ringR}" x2="${R.x}" y2="${R.y-cogR}" stroke="#4a4f57" stroke-width="3" stroke-dasharray="3 1.5"/>
+                 <line x1="${BB.x}" y1="${BB.y+ringR}" x2="${R.x+8}" y2="${R.y+cogR+20}" stroke="#4a4f57" stroke-width="3" stroke-dasharray="3 1.5"/>`;
+  let cassette = "";
+  for(let k=0;k<5;k++) cassette += `<circle cx="${R.x}" cy="${R.y}" r="${cogR-k*3}" fill="none" stroke="${k%2?"#7c838c":"#b9c0c8"}" stroke-width="2"/>`;
+  const derailleur = `<path d="M${R.x+4} ${R.y+4} L ${R.x+14} ${R.y+cogR+6} L ${R.x+10} ${R.y+cogR+26} L ${R.x-4} ${R.y+cogR+24} L ${R.x+2} ${R.y+cogR+4} Z" fill="url(#gBlack)"/>
+    <circle cx="${R.x+8}" cy="${R.y+cogR+8}" r="3.5" fill="#666"/><circle cx="${R.x+6}" cy="${R.y+cogR+21}" r="3.5" fill="#666"/>`;
+  let ring = `<circle cx="${BB.x}" cy="${BB.y}" r="${ringR}" fill="none" stroke="#2a2d33" stroke-width="5"/>
+    <circle cx="${BB.x}" cy="${BB.y}" r="${ringR+2}" fill="none" stroke="#2a2d33" stroke-width="2" stroke-dasharray="2 2"/>`;
+  for(let i=0;i<4;i++){ const a=(i*90+20)*Math.PI/180;
+    ring += `<line x1="${BB.x}" y1="${BB.y}" x2="${(BB.x+Math.cos(a)*(ringR-3)).toFixed(1)}" y2="${(BB.y+Math.sin(a)*(ringR-3)).toFixed(1)}" stroke="url(#gBlack)" stroke-width="5" stroke-linecap="round"/>`; }
   const pd = chosen("pedals");
   const flat = /Stamp|Flat/.test(pd.n);
   const crankEnd = {x:BB.x+26, y:BB.y+44};
-  const crank = `<line x1="${BB.x}" y1="${BB.y}" x2="${crankEnd.x}" y2="${crankEnd.y}" stroke="#1b1d22" stroke-width="8" stroke-linecap="round"/>
-     <rect x="${crankEnd.x-(flat?14:10)}" y="${crankEnd.y-3}" width="${flat?28:20}" height="${flat?8:6}" rx="2" fill="${flat?"#2a2d33":"#111"}"/>
-     <circle cx="${BB.x}" cy="${BB.y}" r="6" fill="#111"/>`;
+  const crank = `<line x1="${BB.x}" y1="${BB.y}" x2="${crankEnd.x}" y2="${crankEnd.y}" stroke="url(#gBlack)" stroke-width="9" stroke-linecap="round"/>
+     <line x1="${BB.x+2}" y1="${BB.y+2}" x2="${crankEnd.x-1}" y2="${crankEnd.y-4}" stroke="#fff" stroke-opacity=".2" stroke-width="2"/>
+     <rect x="${crankEnd.x-(flat?15:11)}" y="${crankEnd.y-3}" width="${flat?30:22}" height="${flat?8:6}" rx="2" fill="${flat?"#2a2d33":"#111"}"/>
+     ${flat?`<g fill="#9aa1aa">${[...Array(6)].map((_,i)=>`<rect x="${crankEnd.x-13+i*5}" y="${crankEnd.y-5}" width="1.5" height="2"/>`).join("")}</g>`:`<rect x="${crankEnd.x-6}" y="${crankEnd.y-4}" width="12" height="2" fill="url(#gChrome)"/>`}
+     <circle cx="${BB.x}" cy="${BB.y}" r="6" fill="url(#gChrome)"/>`;
 
-  // bottle cage + bottle on down tube
+  // bottle + cage
   const bt = {x:BB.x+(H2.x-BB.x)*0.32, y:BB.y+(H2.y-BB.y)*0.32};
   const ang = Math.atan2(H2.y-BB.y,H2.x-BB.x)*180/Math.PI;
-  const bottle = `<g transform="translate(${bt.x} ${bt.y}) rotate(${ang})"><rect x="6" y="-20" width="52" height="15" rx="6" fill="#e9ecef" stroke="#c7ccd2"/><rect x="56" y="-17" width="8" height="9" rx="2" fill="#333"/></g>`;
+  const bottle = `<g transform="translate(${bt.x} ${bt.y}) rotate(${ang})"><rect x="6" y="-21" width="52" height="16" rx="6" fill="#eef1f4" stroke="#c7ccd2"/>
+     <rect x="10" y="-18" width="40" height="3" rx="1.5" fill="#fff" opacity=".8"/><rect x="56" y="-18" width="9" height="10" rx="2" fill="#333"/>
+     <path d="M10 -5 L 10 -21 M 48 -5 L 48 -21" stroke="#222" stroke-width="2"/></g>`;
 
   const name = escapeXml(document.getElementById("bikeName").value || "My Dream Bike");
+  const ttMid = {x:(S.x+H1.x)/2, y:(S.y+H1.y)/2};
+  const ttAng = Math.atan2(H1.y-S.y,H1.x-S.x)*180/Math.PI;
   return `<svg viewBox="20 40 590 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${name}, a ${TYPES[T].label.toLowerCase()} bike">
-    <ellipse cx="310" cy="375" rx="270" ry="10" fill="#000" opacity=".08"/>
-    ${wheel(R)}${wheel(F)}
-    ${cassette}${derailleur}${chain}
-    ${fork}${frame}${chosen("cage").p?bottle:""}${post}${saddle}${cockpit}${ring}${crank}
-    <text x="${(S.x+H1.x)/2}" y="${(S.y+H1.y)/2+ (T==="mtb"?3:4)}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="9" fill="${light?"#333":"#fff"}" opacity=".9" transform="rotate(${Math.atan2(H1.y-S.y,H1.x-S.x)*180/Math.PI} ${(S.x+H1.x)/2} ${(S.y+H1.y)/2})">${name.toUpperCase()}</text>
+    ${defs}
+    <ellipse cx="310" cy="374" rx="250" ry="8" fill="#000" opacity=".18" filter="url(#blur)"/>
+    ${wheel(R,0,false)}${wheel(F,1,true)}
+    ${cassette}${chain}${derailleur}
+    ${fork}${frame}${calipers}${hoses}${chosen("cage").p?bottle:""}${post}${saddle}${cockpit}${computer}${lights}${ring}${crank}
+    <text x="${ttMid.x}" y="${ttMid.y+3}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="8.5" letter-spacing=".5" fill="${light?"#333":"#fff"}" opacity=".92" transform="rotate(${ttAng} ${ttMid.x} ${ttMid.y})">${name.toUpperCase()}</text>
   </svg>`;
 }
 
@@ -466,7 +588,7 @@ function luminance(hex){
   return (0.299*r+0.587*g+0.114*b)/255;
 }
 function escapeXml(s){ return s.replace(/[<>&"']/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;","'":"&#39;"}[c])); }
-const ICON = {frame:"🚲",fork:"🔧",group:"⚙️",wheels:"⭕",tires:"🛞",rotors:"💿",bar:"🎮",grip:"✋",saddle:"💺",seatpost:"📏",post:"⬇️",pedals:"👟",computer:"⌚",lights:"💡",cage:"🧴"};
+const ICON = {stem:"🔩",crank:"⚙️",cassette:"⚙️",bell:"🔔",frame:"🚲",fork:"🔧",group:"⚙️",wheels:"⭕",tires:"🛞",rotors:"💿",bar:"🎮",grip:"✋",saddle:"💺",seatpost:"📏",post:"⬇️",pedals:"👟",computer:"⌚",lights:"💡",cage:"🧴"};
 const photo = (file,w) => "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(file) + "?width=" + w;
 const filePage = file => "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file);
 function thumb(i,cat,cls){
