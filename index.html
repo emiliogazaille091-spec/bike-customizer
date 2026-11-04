@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bike Builder</title>
+<meta name="description" content="Pick real bike parts and build your dream custom bike, just for fun.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5f1; --panel:#ffffff; --ink:#16181d; --muted:#5d6370; --line:#e3e1da;
+  --accent:#ff5a1f; --accent-ink:#ffffff; --chip:#f0eee8; --sel:#fff1ea;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111317; --panel:#1a1d23; --ink:#eef0f3; --muted:#9aa1ad; --line:#2a2e36;
+    --accent:#ff6a33; --accent-ink:#111317; --chip:#23272f; --sel:#2c211c;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.15;margin:0}
+a{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+header.hero{padding:48px 0 28px}
+.hero .kicker{font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+.hero h1{font-size:clamp(34px,6vw,60px);margin:8px 0 12px}
+.hero p{color:var(--muted);max-width:620px;margin:0;font-size:18px}
+nav.top{display:flex;gap:18px;margin-top:20px;flex-wrap:wrap}
+nav.top a{color:var(--ink);text-decoration:none;font-weight:600;border-bottom:2px solid var(--accent)}
+
+.builder{display:grid;grid-template-columns:1.25fr 1fr;gap:24px;align-items:start;margin:12px 0 56px}
+@media (max-width:900px){.builder{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.preview{position:sticky;top:16px;padding:18px}
+@media (max-width:900px){.preview{position:static}}
+.preview svg{width:100%;height:auto;display:block}
+.namebox{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.namebox input{flex:1;min-width:0;font:700 22px "Space Grotesk",sans-serif;border:none;background:transparent;color:var(--ink);padding:4px 0;border-bottom:2px dashed var(--line)}
+.namebox input:focus{outline:none;border-bottom-color:var(--accent)}
+.totals{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.stat{flex:1;min-width:120px;background:var(--chip);border-radius:12px;padding:10px 14px}
+.stat b{display:block;font:700 24px "Space Grotesk",sans-serif}
+.stat span{color:var(--muted);font-size:13px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button{font:600 15px Inter,sans-serif;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 16px;cursor:pointer}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:hover{filter:brightness(.97)}
+.toast{color:var(--muted);font-size:14px;min-height:20px;margin-top:8px}
+
+.options{padding:8px 18px 18px}
+.opt{border-bottom:1px solid var(--line);padding:16px 0}
+.opt:last-child{border-bottom:none}
+.opt h3{font-size:17px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.opt h3 small{font:500 13px Inter,sans-serif;color:var(--muted)}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.types button{border-radius:12px;padding:12px 8px}
+.types button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.list{display:grid;gap:8px;margin-top:10px}
+.item{display:flex;justify-content:space-between;gap:10px;text-align:left;border-radius:12px;padding:10px 12px;width:100%}
+.item .nm{font-weight:600}
+.item .nt{display:block;color:var(--muted);font-size:13px;font-weight:400}
+.item .pr{font-weight:600;white-space:nowrap}
+.item.on{border-color:var(--accent);background:var(--sel);box-shadow:inset 0 0 0 1px var(--accent)}
+.swatches{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.sw{width:36px;height:36px;border-radius:50%;padding:0;border:2px solid var(--line)}
+.sw.on{outline:3px solid var(--accent);outline-offset:2px}
+
+section.guide{margin:0 0 56px}
+section.guide h2,section.summary h2{font-size:32px;margin-bottom:8px}
+.lead{color:var(--muted);margin:0 0 20px;max-width:700px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.part{padding:18px}
+.part h3{font-size:18px;margin-bottom:6px}
+.part p{margin:0 0 8px;color:var(--muted);font-size:15px}
+.part .tip{font-size:14px;color:var(--ink)}
+.part .tip b{color:var(--accent)}
+section.summary{margin-bottom:56px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+td.r,th.r{text-align:right;white-space:nowrap}
+tfoot td{font-weight:700;border-bottom:none}
+.tablewrap{overflow-x:auto;padding:6px}
+footer{color:var(--muted);font-size:14px;padding:24px 0 48px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="kicker">Custom bike builder</div>
+    <h1>Build the bike you'd ride every day.</h1>
+    <p>Pick a style, then choose real parts from brands like Shimano, SRAM, Fox and Zipp. Watch your bike change as you go and see what it would cost.</p>
+    <nav class="top"><a href="#build">Build</a><a href="#summary">Parts list</a><a href="#guide">Parts guide</a></nav>
+  </header>
+
+  <main>
+    <div class="builder" id="build">
+      <div class="card preview">
+        <div class="namebox"><input id="bikeName" aria-label="Name your bike" value="My Dream Bike" maxlength="40"></div>
+        <div id="bike" aria-live="polite"></div>
+        <div class="totals">
+          <div class="stat"><b id="total">$0</b><span>Approximate total</span></div>
+          <div class="stat"><b id="typeLabel">Road</b><span>Bike style</span></div>
+        </div>
+        <div class="actions">
+          <button class="primary" id="share">Copy link to my build</button>
+          <button id="random">Surprise me</button>
+          <button id="download">Download picture</button>
+        </div>
+        <div class="toast" id="toast"></div>
+      </div>
+      <div class="card options" id="options"></div>
+    </div>
+
+    <section class="summary" id="summary">
+      <h2>Your parts list</h2>
+      <p class="lead">Everything on your build, with approximate US retail prices. Prices change often, so treat these as ballpark numbers.</p>
+      <div class="card tablewrap"><table id="sumTable"></table></div>
+    </section>
+
+    <section class="guide" id="guide">
+      <h2>Bike parts guide</h2>
+      <p class="lead">New to bike parts? Here's what each piece does and what to look for when you pick one.</p>
+      <div class="grid" id="guideGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    Made for fun. This isn't a store, and it isn't connected to any of the brands shown. Prices are rough estimates and may be out of date.
+  </footer>
+</div>
+
+<script>
+/* ---------- Part catalog (approximate US retail prices) ---------- */
+const TYPES = {
+  road:   {label:"Road",     blurb:"Fast on pavement"},
+  gravel: {label:"Gravel",   blurb:"Roads and dirt"},
+  mtb:    {label:"Mountain", blurb:"Trails and jumps"}
+};
+
+const CATS = [
+  {id:"frame", label:"Frameset", items:[
+    {n:"Cannondale CAAD13", t:["road"], p:1400, note:"Aluminum frame that rides like carbon"},
+    {n:"Canyon Ultimate CF SLX", t:["road"], p:2900, note:"Light carbon climbing frame"},
+    {n:"Specialized S-Works Tarmac SL8", t:["road"], p:5500, note:"Pro race frame, very light and stiff"},
+    {n:"Surly Straggler", t:["gravel"], p:800, note:"Tough steel frame, built to last"},
+    {n:"Salsa Warbird Carbon", t:["gravel"], p:2500, note:"Carbon gravel racer"},
+    {n:"Specialized Crux", t:["gravel"], p:4000, note:"Super light gravel frame"},
+    {n:"Marin Rift Zone", t:["mtb"], p:1600, note:"Playful aluminum trail frame"},
+    {n:"Santa Cruz Hightower C", t:["mtb"], p:3900, note:"Carbon trail frame with rear shock"},
+    {n:"Specialized Stumpjumper", t:["mtb"], p:4200, note:"Do-it-all trail frame"}
+  ]},
+  {id:"fork", label:"Suspension fork", only:["mtb"], items:[
+    {n:"RockShox Pike Select", t:["mtb"], p:800, note:"140mm travel, trail favorite", travel:"140"},
+    {n:"Fox 34 Factory", t:["mtb"], p:1100, note:"130mm travel, light and smooth", travel:"130"},
+    {n:"Fox 36 Factory", t:["mtb"], p:1250, note:"160mm travel for big descents", travel:"160"},
+    {n:"RockShox ZEB Ultimate", t:["mtb"], p:1200, note:"170mm travel, enduro beast", travel:"170"}
+  ]},
+  {id:"group", label:"Groupset (gears + brakes)", items:[
+    {n:"Shimano 105 R7100", t:["road"], p:1000, note:"12-speed mechanical, great value"},
+    {n:"Shimano Ultegra Di2", t:["road"], p:2100, note:"12-speed electronic shifting"},
+    {n:"SRAM Rival AXS", t:["road","gravel"], p:1400, note:"Wireless electronic shifting"},
+    {n:"SRAM Red AXS", t:["road"], p:4000, note:"Top-tier wireless race groupset"},
+    {n:"Shimano GRX 820", t:["gravel"], p:900, note:"12-speed, made for dirt"},
+    {n:"SRAM Apex XPLR", t:["gravel"], p:700, note:"1x simple setup, budget friendly"},
+    {n:"Shimano Deore M6100", t:["mtb"], p:500, note:"12-speed workhorse"},
+    {n:"Shimano XT M8100", t:["mtb"], p:1100, note:"Fast, reliable shifting"},
+    {n:"SRAM GX Eagle Transmission", t:["mtb"], p:1500, note:"Wireless, super tough derailleur"}
+  ]},
+  {id:"wheels", label:"Wheelset", items:[
+    {n:"Fulcrum Racing 4", t:["road"], p:500, note:"Aluminum, solid all-rounder", depth:6},
+    {n:"Zipp 303 Firecrest", t:["road","gravel"], p:1800, note:"45mm carbon, fast and light", depth:16},
+    {n:"Zipp 404 Firecrest", t:["road"], p:2300, note:"58mm deep carbon aero wheels", depth:22},
+    {n:"ENVE SES 4.5", t:["road"], p:2900, note:"Premium deep carbon", depth:20},
+    {n:"DT Swiss G 1800", t:["gravel"], p:700, note:"Aluminum, built tough", depth:6},
+    {n:"DT Swiss M 1900", t:["mtb"], p:500, note:"Reliable aluminum trail wheels", depth:5},
+    {n:"Stan's Flow MK4", t:["mtb"], p:800, note:"Wide rims for grip", depth:6},
+    {n:"Reserve 30 HD", t:["mtb"], p:2000, note:"Carbon, lifetime warranty", depth:8}
+  ]},
+  {id:"tires", label:"Tires (pair)", items:[
+    {n:"Continental Grand Prix 5000 S TR", t:["road"], p:180, note:"28mm, fast and grippy", style:"slick"},
+    {n:"Pirelli P Zero Race", t:["road"], p:160, note:"28mm race tire", style:"slick"},
+    {n:"Vittoria Corsa Pro", t:["road"], p:200, note:"Tan sidewall classic look", style:"slick", tan:true},
+    {n:"Panaracer GravelKing SK", t:["gravel"], p:120, note:"40mm, tan sidewall option", style:"semi", tan:true},
+    {n:"WTB Riddler", t:["gravel"], p:120, note:"45mm, fast center + side knobs", style:"semi"},
+    {n:"Schwalbe G-One Allround", t:["gravel"], p:140, note:"40mm, smooth on mixed roads", style:"semi"},
+    {n:"Maxxis Minion DHF", t:["mtb"], p:180, note:"2.5in, legendary cornering grip", style:"knobby"},
+    {n:"Maxxis Assegai", t:["mtb"], p:190, note:"2.5in, max grip everywhere", style:"knobby"},
+    {n:"Schwalbe Magic Mary", t:["mtb"], p:180, note:"2.4in, loves loose dirt", style:"knobby"}
+  ]},
+  {id:"bar", label:"Handlebar", items:[
+    {n:"Ritchey Comp Streem", t:["road"], p:45, note:"Simple aluminum drop bar"},
+    {n:"Zipp Service Course SL-70", t:["road","gravel"], p:130, note:"Light aluminum drop bar"},
+    {n:"ENVE SES Aero", t:["road"], p:450, note:"Carbon aero bar"},
+    {n:"Salsa Cowchipper", t:["gravel"], p:80, note:"Flared drops for control off-road"},
+    {n:"Renthal Fatbar", t:["mtb"], p:100, note:"Aluminum riser bar, 800mm"},
+    {n:"OneUp Carbon Bar", t:["mtb"], p:150, note:"Carbon, soaks up trail buzz"}
+  ]},
+  {id:"saddle", label:"Saddle", items:[
+    {n:"Specialized Power Expert", t:["road","gravel","mtb"], p:165, note:"Short nose, very popular", color:"#222"},
+    {n:"Fizik Antares R3", t:["road","gravel"], p:200, note:"Sleek racing shape", color:"#2b2b2b"},
+    {n:"Brooks B17", t:["road","gravel"], p:150, note:"Classic leather, honey brown", color:"#b8762f"},
+    {n:"WTB Volt", t:["gravel","mtb"], p:60, note:"Comfy, budget friendly", color:"#1f1f1f"},
+    {n:"Ergon SM Enduro", t:["mtb"], p:120, note:"Built for long trail days", color:"#333"}
+  ]},
+  {id:"post", label:"Dropper post", only:["mtb"], items:[
+    {n:"OneUp V2 Dropper", t:["mtb"], p:230, note:"Great value, easy to service"},
+    {n:"Fox Transfer Factory", t:["mtb"], p:350, note:"Smooth and reliable"},
+    {n:"RockShox Reverb AXS", t:["mtb"], p:800, note:"Wireless button, no cable"}
+  ]},
+  {id:"pedals", label:"Pedals", items:[
+    {n:"Shimano Ultegra R8000 SPD-SL", t:["road"], p:190, note:"Clip-in road pedals"},
+    {n:"Look Keo Blade", t:["road"], p:150, note:"Light clip-in road pedals"},
+    {n:"Shimano XT M8100 SPD", t:["gravel","mtb"], p:120, note:"Clip-in, walkable shoes"},
+    {n:"Crankbrothers Stamp 7", t:["gravel","mtb"], p:150, note:"Grippy flat pedals"},
+    {n:"OneUp Aluminum Flat", t:["mtb"], p:140, note:"Thin, super grippy flats"}
+  ]}
+];
+
+const COLORS = [
+  ["Fire orange","#ff5a1f"],["Race red","#d7263d"],["Midnight","#1d2433"],["Arctic white","#eef0f2"],
+  ["Forest","#2f6b3f"],["Sky blue","#2f8fd8"],["Sunshine","#f2c230"],["Purple haze","#7b4fd6"],
+  ["Raw silver","#a9afb7"],["Bubblegum","#f27db5"]
+];
+
+/* ---------- State ---------- */
+let state = {type:"road", color:COLORS[0][1], pick:{}};
+
+function itemsFor(cat,type){ return cat.items.filter(i=>i.t.includes(type)); }
+function catActive(cat,type){ return !cat.only || cat.only.includes(type); }
+function chosen(catId){
+  const cat = CATS.find(c=>c.id===catId);
+  const list = itemsFor(cat,state.type);
+  return list.find(i=>i.n===state.pick[catId]) || list[0];
+}
+function fixPicks(){
+  CATS.forEach(c=>{
+    if(!catActive(c,state.type)) return;
+    const list = itemsFor(c,state.type);
+    if(!list.some(i=>i.n===state.pick[c.id])) state.pick[c.id]=list[0].n;
+  });
+}
+
+/* ---------- Drawing ---------- */
+function bikeSVG(){
+  const T = state.type, col = state.color;
+  const wh = chosen("wheels"), ti = chosen("tires"), sd = chosen("saddle");
+  const R = {x:150,y:270}, F = {x:470,y:270}, BB = {x:290,y:278};
+  const tireW = T==="road"?7:T==="gravel"?10:15;
+  const rOut = 100;
+  const rTire = rOut - tireW/2;
+  const depth = wh.depth||6;
+  const rRim = rOut - tireW - depth/2;
+  const rInner = rOut - tireW - depth;
+  const dark = "#1b1d22";
+  const metal = "#8a9099";
+  const light = luminance(col) > .75;
+  const frameStroke = light ? "#c9ccd1" : "none";
+
+  // geometry per type
+  let S, H1, H2, seatTop, stemEnd;
+  if(T==="road"){ S={x:262,y:142}; H1={x:432,y:128}; H2={x:443,y:176}; seatTop={x:252,y:104}; }
+  else if(T==="gravel"){ S={x:262,y:146}; H1={x:432,y:124}; H2={x:444,y:180}; seatTop={x:253,y:106}; }
+  else { S={x:266,y:168}; H1={x:430,y:132}; H2={x:445,y:188}; seatTop={x:254,y:108}; }
+  const ST = {x:S.x+ (BB.x-S.x)*0.0, y:S.y};
+
+  const wheel = (c) => {
+    let spokes = "";
+    for(let i=0;i<20;i++){
+      const a = i*Math.PI/10;
+      spokes += `<line x1="${c.x}" y1="${c.y}" x2="${(c.x+Math.cos(a)*rInner).toFixed(1)}" y2="${(c.y+Math.sin(a)*rInner).toFixed(1)}" stroke="${metal}" stroke-width="1"/>`;
+    }
+    let tire = `<circle cx="${c.x}" cy="${c.y}" r="${rTire}" fill="none" stroke="${dark}" stroke-width="${tireW}"/>`;
+    if(ti.style==="knobby"){
+      tire += `<circle cx="${c.x}" cy="${c.y}" r="${rOut+2}" fill="none" stroke="${dark}" stroke-width="5" stroke-dasharray="4 4"/>`;
+    } else if(ti.style==="semi"){
+      tire += `<circle cx="${c.x}" cy="${c.y}" r="${rOut+1}" fill="none" stroke="${dark}" stroke-width="3" stroke-dasharray="2 5"/>`;
+    }
+    if(ti.tan){
+      tire += `<circle cx="${c.x}" cy="${c.y}" r="${rOut - tireW + 1.5}" fill="none" stroke="#c99a5b" stroke-width="3"/>`;
+    }
+    const rim = `<circle cx="${c.x}" cy="${c.y}" r="${rRim}" fill="none" stroke="${depth>10?"#23262c":"#3a3e46"}" stroke-width="${depth}"/>`;
+    const decal = depth>10 ? `<circle cx="${c.x}" cy="${c.y}" r="${rRim}" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-dasharray="26 60"/>` : "";
+    const rotor = `<circle cx="${c.x}" cy="${c.y}" r="17" fill="none" stroke="#b8bec6" stroke-width="3"/>`;
+    const hub = `<circle cx="${c.x}" cy="${c.y}" r="6" fill="${dark}"/>`;
+    return spokes + rim + decal + tire + rotor + hub;
+  };
+
+  const tube = (a,b,w) => `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/>`;
+  const tubeOutline = (a,b,w) => frameStroke==="none" ? "" : `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${frameStroke}" stroke-width="${w+2}" stroke-linecap="round"/>`;
+
+  // fork
+  let fork;
+  if(T==="mtb"){
+    const fk = chosen("fork");
+    const crown = {x:H2.x+3,y:H2.y+12};
+    const lowTop = {x:H2.x+ (F.x-H2.x)*0.45, y:H2.y+(F.y-H2.y)*0.45};
+    fork = `<line x1="${crown.x}" y1="${crown.y}" x2="${lowTop.x}" y2="${lowTop.y}" stroke="${fk.n.startsWith("Fox")?"#c5a042":"#2a2d33"}" stroke-width="9" stroke-linecap="round"/>
+      <line x1="${lowTop.x}" y1="${lowTop.y}" x2="${F.x}" y2="${F.y}" stroke="${fk.n.startsWith("Fox")?"#e8762b":"#111"}" stroke-width="13" stroke-linecap="round"/>
+      <rect x="${H2.x-8}" y="${H2.y+4}" width="20" height="12" rx="4" fill="#111"/>
+      <text x="${lowTop.x+14}" y="${lowTop.y+30}" font-size="10" font-family="Inter,sans-serif" fill="${dark}" font-weight="700">${fk.travel}mm</text>`;
+  } else {
+    fork = `<path d="M${H2.x} ${H2.y} Q ${F.x-2} ${H2.y+50} ${F.x} ${F.y}" fill="none" stroke="${col}" stroke-width="8" stroke-linecap="round"/>`;
+  }
+
+  // frame
+  let frame = "";
+  const segs = [[S,BB,11],[BB,R,8],[S,R,7],[S,H1,10],[BB,H2,13],[H1,H2,14]];
+  segs.forEach(s=>frame+=tubeOutline(...s));
+  segs.forEach(s=>frame+=tube(...s));
+  if(T==="mtb"){
+    // rear shock
+    frame += `<line x1="${S.x+25}" y1="${S.y+4}" x2="${BB.x+30}" y2="${BB.y-55}" stroke="#111" stroke-width="7" stroke-linecap="round"/>
+              <line x1="${S.x+28}" y1="${S.y+8}" x2="${S.x+46}" y2="${S.y+36}" stroke="#c5a042" stroke-width="5"/>`;
+  }
+
+  // seatpost + saddle
+  const post = T==="mtb"
+    ? `<line x1="${S.x}" y1="${S.y}" x2="${seatTop.x}" y2="${seatTop.y}" stroke="#111" stroke-width="8"/><line x1="${S.x-1}" y1="${S.y-6}" x2="${S.x-2}" y2="${S.y-14}" stroke="#555" stroke-width="10"/>`
+    : `<line x1="${S.x}" y1="${S.y}" x2="${seatTop.x}" y2="${seatTop.y}" stroke="#2a2d33" stroke-width="6"/>`;
+  const saddle = sd.n.includes("Brooks")
+    ? `<path d="M${seatTop.x-34} ${seatTop.y-6} Q ${seatTop.x-30} ${seatTop.y-16} ${seatTop.x} ${seatTop.y-12} L ${seatTop.x+30} ${seatTop.y-8} Q ${seatTop.x+34} ${seatTop.y-4} ${seatTop.x+26} ${seatTop.y-2} L ${seatTop.x-30} ${seatTop.y+2} Z" fill="${sd.color}"/>
+       <circle cx="${seatTop.x-24}" cy="${seatTop.y-4}" r="1.6" fill="#e9d2a8"/><circle cx="${seatTop.x+20}" cy="${seatTop.y-5}" r="1.6" fill="#e9d2a8"/>`
+    : `<path d="M${seatTop.x-34} ${seatTop.y-8} Q ${seatTop.x-20} ${seatTop.y-14} ${seatTop.x+6} ${seatTop.y-11} L ${seatTop.x+32} ${seatTop.y-8} Q ${seatTop.x+36} ${seatTop.y-4} ${seatTop.x+28} ${seatTop.y-3} L ${seatTop.x-28} ${seatTop.y} Q ${seatTop.x-38} ${seatTop.y-2} ${seatTop.x-34} ${seatTop.y-8} Z" fill="${sd.color}"/>`;
+
+  // stem + bar
+  let cockpit;
+  const stemTop = {x:H1.x-4, y:H1.y-14};
+  if(T==="mtb"){
+    stemEnd = {x:stemTop.x+22, y:stemTop.y-2};
+    cockpit = `<line x1="${H1.x}" y1="${H1.y}" x2="${stemTop.x}" y2="${stemTop.y}" stroke="#222" stroke-width="12"/>
+      <line x1="${stemTop.x}" y1="${stemTop.y}" x2="${stemEnd.x}" y2="${stemEnd.y}" stroke="#222" stroke-width="9" stroke-linecap="round"/>
+      <path d="M${stemEnd.x} ${stemEnd.y} L ${stemEnd.x-8} ${stemEnd.y-16}" stroke="#2a2d33" stroke-width="6" stroke-linecap="round"/>
+      <rect x="${stemEnd.x-16}" y="${stemEnd.y-30}" width="13" height="16" rx="4" fill="#111" transform="rotate(-25 ${stemEnd.x-10} ${stemEnd.y-22})"/>
+      <line x1="${stemEnd.x-4}" y1="${stemEnd.y-10}" x2="${stemEnd.x+14}" y2="${stemEnd.y-4}" stroke="#555" stroke-width="3" stroke-linecap="round"/>`;
+  } else {
+    stemEnd = {x:stemTop.x+26, y:stemTop.y+1};
+    const flare = T==="gravel" ? 6 : 0;
+    const e = stemEnd;
+    cockpit = `<line x1="${H1.x}" y1="${H1.y}" x2="${stemTop.x}" y2="${stemTop.y}" stroke="#222" stroke-width="12"/>
+      <line x1="${stemTop.x}" y1="${stemTop.y}" x2="${e.x}" y2="${e.y}" stroke="#222" stroke-width="8" stroke-linecap="round"/>
+      <path d="M${e.x} ${e.y} L ${e.x+20} ${e.y+1} Q ${e.x+40} ${e.y+4} ${e.x+38+flare} ${e.y+26} Q ${e.x+36+flare} ${e.y+44} ${e.x+16+flare} ${e.y+42}" fill="none" stroke="#1d1f24" stroke-width="7" stroke-linecap="round"/>
+      <path d="M${e.x+16} ${e.y-1} Q ${e.x+22} ${e.y-16} ${e.x+30} ${e.y-10} L ${e.x+32} ${e.y+6} Z" fill="#111"/>`;
+  }
+
+  // drivetrain
+  const ringR = T==="mtb" ? 19 : 26;
+  const cogR = T==="mtb" ? 22 : 14;
+  const chain = `<line x1="${BB.x}" y1="${BB.y-ringR}" x2="${R.x}" y2="${R.y-cogR}" stroke="#555" stroke-width="2.5"/>
+                 <line x1="${BB.x}" y1="${BB.y+ringR}" x2="${R.x+6}" y2="${R.y+cogR+22}" stroke="#555" stroke-width="2.5"/>`;
+  const cassette = `<circle cx="${R.x}" cy="${R.y}" r="${cogR}" fill="none" stroke="#9aa1aa" stroke-width="4"/>`;
+  const derailleur = `<path d="M${R.x+2} ${R.y+6} L ${R.x+10} ${R.y+cogR+22} L ${R.x-6} ${R.y+cogR+26} Z" fill="#2a2d33"/>`;
+  const ring = `<circle cx="${BB.x}" cy="${BB.y}" r="${ringR}" fill="none" stroke="#2a2d33" stroke-width="5"/><circle cx="${BB.x}" cy="${BB.y}" r="${ringR-7}" fill="none" stroke="#6b717b" stroke-width="2" stroke-dasharray="6 4"/>`;
+  const pd = chosen("pedals");
+  const flat = /Stamp|Flat/.test(pd.n);
+  const crankEnd = {x:BB.x+26, y:BB.y+44};
+  const crank = `<line x1="${BB.x}" y1="${BB.y}" x2="${crankEnd.x}" y2="${crankEnd.y}" stroke="#1b1d22" stroke-width="8" stroke-linecap="round"/>
+     <rect x="${crankEnd.x-(flat?14:10)}" y="${crankEnd.y-3}" width="${flat?28:20}" height="${flat?8:6}" rx="2" fill="${flat?"#2a2d33":"#111"}"/>
+     <circle cx="${BB.x}" cy="${BB.y}" r="6" fill="#111"/>`;
+
+  // bottle cage + bottle on down tube
+  const bt = {x:BB.x+(H2.x-BB.x)*0.32, y:BB.y+(H2.y-BB.y)*0.32};
+  const ang = Math.atan2(H2.y-BB.y,H2.x-BB.x)*180/Math.PI;
+  const bottle = `<g transform="translate(${bt.x} ${bt.y}) rotate(${ang})"><rect x="6" y="-20" width="52" height="15" rx="6" fill="#e9ecef" stroke="#c7ccd2"/><rect x="56" y="-17" width="8" height="9" rx="2" fill="#333"/></g>`;
+
+  const name = escapeXml(document.getElementById("bikeName").value || "My Dream Bike");
+  return `<svg viewBox="20 40 590 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${name}, a ${TYPES[T].label.toLowerCase()} bike">
+    <ellipse cx="310" cy="375" rx="270" ry="10" fill="#000" opacity=".08"/>
+    ${wheel(R)}${wheel(F)}
+    ${cassette}${derailleur}${chain}
+    ${fork}${frame}${bottle}${post}${saddle}${cockpit}${ring}${crank}
+    <text x="${(S.x+H1.x)/2}" y="${(S.y+H1.y)/2+ (T==="mtb"?3:4)}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="9" fill="${light?"#333":"#fff"}" opacity=".9" transform="rotate(${Math.atan2(H1.y-S.y,H1.x-S.x)*180/Math.PI} ${(S.x+H1.x)/2} ${(S.y+H1.y)/2})">${name.toUpperCase()}</text>
+  </svg>`;
+}
+
+function luminance(hex){
+  const n = parseInt(hex.slice(1),16);
+  const r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  return (0.299*r+0.587*g+0.114*b)/255;
+}
+function escapeXml(s){ return s.replace(/[<>&"']/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;","'":"&#39;"}[c])); }
+const money = n => "$" + n.toLocaleString("en-US");
+
+/* ---------- UI ---------- */
+function renderOptions(){
+  const o = document.getElementById("options");
+  let html = `<div class="opt"><h3>1. Pick your style</h3><div class="types">` +
+    Object.entries(TYPES).map(([k,v])=>`<button data-type="${k}" class="${state.type===k?"on":""}"><b>${v.label}</b><br><small>${v.blurb}</small></button>`).join("") +
+    `</div></div>`;
+  html += `<div class="opt"><h3>2. Frame color <small>${COLORS.find(c=>c[1]===state.color)?.[0]||""}</small></h3><div class="swatches">` +
+    COLORS.map(([n,h])=>`<button class="sw ${state.color===h?"on":""}" data-color="${h}" title="${n}" aria-label="${n}" style="background:${h}"></button>`).join("") +
+    `</div></div>`;
+  let step = 3;
+  CATS.forEach(c=>{
+    if(!catActive(c,state.type)) return;
+    const cur = chosen(c.id);
+    html += `<div class="opt"><h3>${step++}. ${c.label} <small>${money(cur.p)}</small></h3><div class="list">` +
+      itemsFor(c,state.type).map(i=>`<button class="item ${i.n===cur.n?"on":""}" data-cat="${c.id}" data-item="${escapeXml(i.n)}"><span><span class="nm">${i.n}</span><span class="nt">${i.note}</span></span><span class="pr">${money(i.p)}</span></button>`).join("") +
+      `</div></div>`;
+  });
+  o.innerHTML = html;
+}
+
+function renderSummary(){
+  let rows = "", total = 0;
+  CATS.forEach(c=>{
+    if(!catActive(c,state.type)) return;
+    const i = chosen(c.id); total += i.p;
+    rows += `<tr><td>${c.label}</td><td><b>${i.n}</b><br><span style="color:var(--muted);font-size:13px">${i.note}</span></td><td class="r">${money(i.p)}</td></tr>`;
+  });
+  rows += `<tr><td>Small stuff</td><td>Chain, cables, bar tape or grips, bottle cage</td><td class="r">${money(SMALL[state.type])}</td></tr>`;
+  total += SMALL[state.type];
+  document.getElementById("sumTable").innerHTML =
+    `<thead><tr><th>Part</th><th>Pick</th><th class="r">Price</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><td></td><td>Total</td><td class="r">${money(total)}</td></tr></tfoot>`;
+  return total;
+}
+const SMALL = {road:120, gravel:120, mtb:100};
+
+function render(){
+  fixPicks();
+  document.getElementById("bike").innerHTML = bikeSVG();
+  const total = renderSummary();
+  document.getElementById("total").textContent = money(total);
+  document.getElementById("typeLabel").textContent = TYPES[state.type].label;
+  renderOptions();
+  saveHash();
+}
+
+document.getElementById("options").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.type){ state.type = b.dataset.type; }
+  else if(b.dataset.color){ state.color = b.dataset.color; }
+  else if(b.dataset.cat){ state.pick[b.dataset.cat] = b.dataset.item.replace(/&amp;/g,"&").replace(/&#39;/g,"'"); }
+  render();
+});
+document.getElementById("bikeName").addEventListener("input", ()=>{ document.getElementById("bike").innerHTML = bikeSVG(); saveHash(); });
+
+document.getElementById("random").addEventListener("click", ()=>{
+  const types = Object.keys(TYPES);
+  state.type = types[Math.floor(Math.random()*types.length)];
+  state.color = COLORS[Math.floor(Math.random()*COLORS.length)][1];
+  CATS.forEach(c=>{ const l=itemsFor(c,state.type); if(l.length) state.pick[c.id]=l[Math.floor(Math.random()*l.length)].n; });
+  render(); toast("New random build. Like it?");
+});
+
+document.getElementById("share").addEventListener("click", async ()=>{
+  saveHash();
+  try { await navigator.clipboard.writeText(location.href); toast("Link copied. Send it to a friend!"); }
+  catch { toast("Copy this page's address to share your build."); }
+});
+
+document.getElementById("download").addEventListener("click", ()=>{
+  const svg = document.querySelector("#bike svg");
+  const xml = new XMLSerializer().serializeToString(svg);
+  const img = new Image();
+  img.onload = ()=>{
+    const c = document.createElement("canvas"); c.width = 1180; c.height = 720;
+    const ctx = c.getContext("2d"); ctx.fillStyle = "#ffffff"; ctx.fillRect(0,0,c.width,c.height);
+    ctx.drawImage(img,0,0,c.width,c.height);
+    const a = document.createElement("a");
+    a.download = (document.getElementById("bikeName").value||"my-bike").replace(/[^a-z0-9]+/gi,"-").toLowerCase()+".png";
+    a.href = c.toDataURL("image/png"); a.click();
+  };
+  img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(xml);
+});
+
+let toastTimer;
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.textContent="",3500); }
+
+/* ---------- Share link (saved in the page address) ---------- */
+function saveHash(){
+  const p = new URLSearchParams();
+  p.set("type",state.type); p.set("color",state.color.slice(1));
+  p.set("name",document.getElementById("bikeName").value);
+  CATS.forEach(c=>{ if(catActive(c,state.type)){ const l=itemsFor(c,state.type); p.set(c.id, l.indexOf(chosen(c.id))); }});
+  history.replaceState(null,"","#"+p.toString());
+}
+function loadHash(){
+  const p = new URLSearchParams(location.hash.slice(1));
+  if(p.get("type") && TYPES[p.get("type")]) state.type = p.get("type");
+  if(/^[0-9a-f]{6}$/i.test(p.get("color")||"")) state.color = "#"+p.get("color");
+  if(p.get("name")) document.getElementById("bikeName").value = p.get("name").slice(0,40);
+  CATS.forEach(c=>{ const l=itemsFor(c,state.type); const i=parseInt(p.get(c.id)); if(l[i]) state.pick[c.id]=l[i].n; });
+}
+
+/* ---------- Parts guide ---------- */
+const GUIDE = [
+  ["Frame","The main skeleton of the bike. Everything else bolts onto it.","Aluminum is affordable and stiff, carbon is lighter and smoother, and steel is tough and comfy."],
+  ["Fork","Holds the front wheel and steers. Mountain bikes use suspension forks that squish over bumps.","More travel (mm) means bigger bumps get soaked up, but the bike gets heavier."],
+  ["Groupset","The gears, shifters, derailleurs, crank, chain and brakes, usually sold as a set.","Electronic shifting (Di2, AXS) is crisp and easy. Mechanical is cheaper and simple to fix."],
+  ["Wheels","Rims, spokes and hubs. One of the best upgrades for how a bike feels.","Deep carbon rims are faster on flat roads. Light, shallow rims are great for climbing."],
+  ["Tires","Your only contact with the ground, so they change grip and speed a lot.","Slick tires roll fast on pavement. Knobby tires grip dirt. Wider tires are more comfy."],
+  ["Handlebar","Where your hands go, and how you steer.","Drop bars give you several hand positions for long rides. Wide flat bars give control on trails."],
+  ["Saddle","The seat. Comfort here makes or breaks a long ride.","A good saddle fits your sit bones. Many shops can measure you for free."],
+  ["Dropper post","A seatpost that drops down at the push of a button.","Lets you get the seat out of the way on steep downhills, then pop it back up to pedal."],
+  ["Pedals","Where your feet push. They come as flat or clip-in.","Clip-in pedals lock your shoes in for power. Flats are easier to learn and great for tricks."]
+];
+document.getElementById("guideGrid").innerHTML = GUIDE.map(([h,p,t])=>`<div class="card part"><h3>${h}</h3><p>${p}</p><div class="tip"><b>Tip:</b> ${t}</div></div>`).join("");
+
+loadHash();
+render();
+</script>
+</body>
+</html>
